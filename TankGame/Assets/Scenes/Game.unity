@@ -2367,15 +2367,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 828340603}
-  - component: {fileID: 828340604}
   - component: {fileID: 828340605}
+  - component: {fileID: 828340606}
+  - component: {fileID: 828340604}
   m_Layer: 0
-  m_Name: Shield_Pickup
+  m_Name: Shield_PowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &828340603
 Transform:
   m_ObjectHideFlags: 0
@@ -2400,9 +2401,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 828340602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e38ed424a1ed66d46a4affa21601b023, type: 3}
+  m_Script: {fileID: 11500000, guid: 96c6d145de84a9b4d844302fe808311d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnDirection: 1
+  powerUp:
+    duration: 0
+    shieldAmount: 20
 --- !u!114 &828340605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2418,6 +2423,19 @@ MonoBehaviour:
   forwardSpeed: 0
   backwardSpeed: 0
   turnSpeed: 100
+--- !u!65 &828340606
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828340602}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15383911, y: 0.3826865, z: 0.3553211}
+  m_Center: {x: -0.0024738312, y: -0.005104363, z: 0.0021260679}
 --- !u!1 &893223423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,15 +2446,15 @@ GameObject:
   m_Component:
   - component: {fileID: 893223424}
   - component: {fileID: 893223426}
-  - component: {fileID: 893223428}
   - component: {fileID: 893223425}
+  - component: {fileID: 893223428}
   m_Layer: 0
-  m_Name: Speed_Pickup
+  m_Name: Speed_PowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &893223424
 Transform:
   m_ObjectHideFlags: 0
@@ -2461,11 +2479,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 893223423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59297ba812940a346a89ce7301712f77, type: 3}
+  m_Script: {fileID: 11500000, guid: 77f5b64b27067e24b9ec5940ccbf393d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 10
-  speedIncrease: 50
+  turnDirection: 1
+  powerUp:
+    duration: 5
+    speedBoost: 5
 --- !u!114 &893223426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3531,8 +3551,9 @@ GameObject:
   - component: {fileID: 1350172547}
   - component: {fileID: 1350172549}
   - component: {fileID: 1350172548}
+  - component: {fileID: 1350172550}
   m_Layer: 0
-  m_Name: Repair_Pickup
+  m_Name: Repair_PowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3562,10 +3583,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1350172546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9286a554e53ce5540b66ab24dcb3f195, type: 3}
+  m_Script: {fileID: 11500000, guid: 530fa3d5aec975f42b4fce662867b857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 15
+  turnDirection: 1
+  powerUp:
+    duration: 0
+    healAmount: 10
 --- !u!114 &1350172549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3581,6 +3605,19 @@ MonoBehaviour:
   forwardSpeed: 0
   backwardSpeed: 0
   turnSpeed: 100
+--- !u!65 &1350172550
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350172546}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15453625, y: 0.41239715, z: 0.22991502}
+  m_Center: {x: -0.0013489723, y: -0.004788816, z: -0.004207313}
 --- !u!1001 &1397901558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4111,6 +4148,21 @@ MonoBehaviour:
   minHealth: 0
   maxHealth: 100
   currentHealth: 0
+--- !u!114 &1658162191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658162182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 136b3a3b88f7ace4ea41be8bab699d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minShield: 0
+  maxShield: 50
+  currentShield: 0
 --- !u!1001 &1765623659
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -35,23 +35,25 @@ public class Mover : MonoBehaviour
         Turn((int)direction);
     }
 
-    public float GetForwardSpeed()
+    public bool IncreaseSpeed(float increase)
     {
-        return forwardSpeed;
+        float oldForwardSpeed = forwardSpeed;
+        float oldBackwardSpeed = backwardSpeed;
+
+        forwardSpeed += increase;
+        backwardSpeed += increase;
+
+        return (forwardSpeed == oldForwardSpeed + increase) && (backwardSpeed == oldBackwardSpeed + increase);
     }
 
-    public float GetBackwardSpeed()
+    public bool DecreaseSpeed(float decrease)
     {
-        return backwardSpeed;
-    }
+        float oldForwardSpeed = forwardSpeed;
+        float oldBackwardSpeed = backwardSpeed;
 
-    public void SetForwardMoveSpeed(float newSpeed)
-    {
-        forwardSpeed = newSpeed;
-    }
+        forwardSpeed -= decrease;
+        backwardSpeed -= decrease;  
 
-    public void SetBackwardMoveSpeed(float newSpeed)
-    {
-        backwardSpeed = newSpeed;
+        return (forwardSpeed == oldForwardSpeed - decrease) && (backwardSpeed == oldBackwardSpeed - decrease);
     }
 }
