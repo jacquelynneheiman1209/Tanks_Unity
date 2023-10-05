@@ -10,6 +10,9 @@ public class Bullet : MonoBehaviour
     [Tooltip("The amount of forces that is applied to the bullet when the player shoots it.")]
     [SerializeField] private float shootForce;
 
+    [Tooltip("The amount of damage that will be applied to anything with a health component upon hit.")]
+    [SerializeField] private float damage;
+
     private float destroyTimer;
     private Rigidbody rbody;
 
@@ -31,7 +34,13 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // handle bullet collision here...
+        Health health = other.GetComponent<Health>();
+
+        if (health != null)
+        {
+            health.AddDamage(damage);
+        }
+
         Destroy(this.gameObject);
     }
 }

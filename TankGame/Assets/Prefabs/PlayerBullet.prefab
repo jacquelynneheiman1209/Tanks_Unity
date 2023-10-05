@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6590649980887160622}
   - component: {fileID: 8957610133045886072}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: PlayerBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyDelay: 5
-  shootForce: 75
+  shootForce: 25
+  damage: 25
 --- !u!54 &6590649980887160622
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -88,7 +89,6 @@ GameObject:
   - component: {fileID: 3605567276125940054}
   - component: {fileID: 8772116559538528220}
   - component: {fileID: 4434014689175801568}
-  - component: {fileID: 1341982940209586351}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -159,16 +159,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1341982940209586351
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8207098107025822393}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
