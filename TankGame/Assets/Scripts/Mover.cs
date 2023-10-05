@@ -30,5 +30,28 @@ public class Mover : MonoBehaviour
         transform.Rotate(0f, direction * turnSpeed * Time.deltaTime, 0f);
     }
 
+    public void Turn(TurnDirection direction)
+    {
+        Turn((int)direction);
+    }
 
+    public float GetForwardSpeed()
+    {
+        return forwardSpeed;
+    }
+
+    public float GetBackwardSpeed()
+    {
+        return backwardSpeed;
+    }
+
+    public void SetForwardMoveSpeed(float newSpeed)
+    {
+        forwardSpeed = newSpeed;
+    }
+
+    public void SetBackwardMoveSpeed(float newSpeed)
+    {
+        backwardSpeed = newSpeed;
+    }
 }

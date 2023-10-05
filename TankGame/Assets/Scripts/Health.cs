@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float minHealth;
     [SerializeField] private float maxHealth;
 
-    private float currentHealth;
+    public float currentHealth;
 
     public event EventHandler HealthChanged;
     public event EventHandler Die;
@@ -20,13 +20,20 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void AddHealth(float amount)
+    public bool AddHealth(float amount)
     {
-        currentHealth += amount;
+        if (currentHealth >= maxHealth)
+        {
+            return false;
+        }
 
-        if (currentHealth > maxHealth)
+        if (currentHealth + amount > maxHealth)
         {
             currentHealth = maxHealth;
+        }
+        else
+        {
+            currentHealth += amount;
         }
 
         HealthArgs args = new HealthArgs();
@@ -37,12 +44,12 @@ public class Health : MonoBehaviour
         args.isDead = false;
 
         HealthChanged.Invoke(this, args);
+
+        return true;
     }
 
     public void AddDamage(float amount)
     {
-        Debug.Log("Adding Damage");
-
         currentHealth -= amount;
 
         HealthArgs args = new HealthArgs();
@@ -51,7 +58,7 @@ public class Health : MonoBehaviour
         args.minHealth = minHealth;
         args.maxHealth = maxHealth;
 
-        if (currentHealth < minHealth)
+        if (currentHealth <= minHealth)
         {
             args.isDead = true;
 

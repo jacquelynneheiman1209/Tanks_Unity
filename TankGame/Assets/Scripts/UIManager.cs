@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject parent;
     private Canvas canvas;
     private Camera mainCamera;
+
+    [SerializeField] private Image healthBar;
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +19,16 @@ public class UIManager : MonoBehaviour
 
         mainCamera = Camera.main;
         canvas.worldCamera = mainCamera;
+
+        if (this.parent != null)
+        {
+            Health health = parent.GetComponent<Health>();
+
+            if (health != null)
+            {
+                health.HealthChanged += UpdateHealthBar;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -22,8 +37,13 @@ public class UIManager : MonoBehaviour
         canvas.transform.LookAt(mainCamera.transform.position);
     }
 
-    public void SetCanvasRenderModer(RenderMode mode)
+    void UpdateHealthBar(object sender, EventArgs args)
     {
-        canvas.renderMode = mode;
+        HealthArgs healthArgs = (HealthArgs)args;
+
+        if (healthArgs != null)
+        {
+            healthBar.fillAmount = healthArgs.currentHealth / healthArgs.maxHealth;
+        }
     }
 }

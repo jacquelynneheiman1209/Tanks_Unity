@@ -33,8 +33,6 @@ public class Shooter : MonoBehaviour
 
             canShoot = false;
             shootTimer = 0;
-
-            Debug.Log("Shoot!");
         }
     }
 }

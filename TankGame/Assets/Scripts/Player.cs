@@ -1,17 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Pawn  
 {
-    private Mover mover;
-    private Shooter shooter;
-
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        mover = GetComponent<Mover>();
-        shooter = GetComponent<Shooter>();
+        base.Start();
+
+        health.HealthChanged += OnHealthChanged;
+        health.Die += OnDeath;
     }
 
     // Update is called once per frame
