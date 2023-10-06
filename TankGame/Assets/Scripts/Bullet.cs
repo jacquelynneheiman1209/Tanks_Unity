@@ -34,13 +34,25 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Health health = other.GetComponent<Health>();
+        Shields shield = other.GetComponent<Shields>();
+        float remainingDamage = damage;
 
-        if (health != null)
+        if (shield != null)
         {
-            health.AddDamage(damage);
+            remainingDamage = shield.Reduce(damage);
+            Debug.Log("Remaining Damage: " + remainingDamage);
         }
 
-        Destroy(this.gameObject);
+        if (remainingDamage > 0)
+        {
+            Health health = other.GetComponent<Health>();
+
+            if (health != null)
+            {
+                health.AddDamage(damage);
+            }
+
+            Destroy(this.gameObject);
+        }
     }
 }

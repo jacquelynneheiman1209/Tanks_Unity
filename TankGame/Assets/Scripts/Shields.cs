@@ -39,52 +39,70 @@ public class Shields : MonoBehaviour
 
             args.isDestroyed = false;
 
-            ShieldChanged.Invoke(this, EventArgs.Empty);
+            ShieldChanged.Invoke(this, args);
         }
 
         return true;
     }
 
-    public bool Reduce(float amount)
+    public float Reduce(float amount)
     {
         if (currentShield <= minShield)
         {
-            return false;
+            return amount;
         }
-
-        currentShield -= amount;
-
-        if (currentShield < minShield)
+        else if (currentShield - amount < minShield)
         {
             currentShield = minShield;
 
             if (ShieldDestroyed != null)
             {
-                ShieldArgs args = new ShieldArgs();
-
-                args.minShield = minShield;
-                args.maxShield = maxShield;
-                args.currentShield = currentShield;
-
-                args.isDestroyed = true;
-
-                ShieldDestroyed.Invoke(this, EventArgs.Empty);
+                RaiseShieldDestroyed();
             }
-        }
 
-        if (ShieldChanged != null)
+            if (ShieldChanged != null)
+            {
+                RaiseShieldChanged();
+            }
+
+            return amount - minShield;
+        }
+        else
         {
-            ShieldArgs args = new ShieldArgs();
+            currentShield -= amount;
 
-            args.minShield = minShield;
-            args.maxShield = maxShield;
-            args.currentShield = currentShield;
+            if (ShieldChanged != null)
+            {
+                RaiseShieldChanged();
+            }
 
-            args.isDestroyed = false;
-
-            ShieldChanged.Invoke(this, EventArgs.Empty);
+            return 0;
         }
+    }
 
-        return true;
+    void RaiseShieldChanged()
+    {
+        ShieldArgs args = new ShieldArgs();
+
+        args.minShield = minShield;
+        args.maxShield = maxShield;
+        args.currentShield = currentShield;
+
+        args.isDestroyed = false;
+
+        ShieldChanged.Invoke(this, args);
+    }
+
+    void RaiseShieldDestroyed()
+    {
+        ShieldArgs args = new ShieldArgs();
+
+        args.minShield = minShield;
+        args.maxShield = maxShield;
+        args.currentShield = currentShield;
+
+        args.isDestroyed = true;
+
+        ShieldDestroyed.Invoke(this, args);
     }
 }
