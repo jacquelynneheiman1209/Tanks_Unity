@@ -20,7 +20,6 @@ public class Player : Pawn
 
         if (health != null)
         {
-            health.AddDamage(25);
             health.Die += OnDeath;
         }
     }
