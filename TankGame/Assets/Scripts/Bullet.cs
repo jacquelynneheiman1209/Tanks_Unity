@@ -40,7 +40,6 @@ public class Bullet : MonoBehaviour
         if (shield != null)
         {
             remainingDamage = shield.Reduce(damage);
-            Debug.Log("Remaining Damage: " + remainingDamage);
         }
 
         if (remainingDamage > 0)

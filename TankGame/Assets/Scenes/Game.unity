@@ -1706,6 +1706,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4245545710166428, guid: 53541c4019db07649a8d7925e2b29fe6, type: 3}
   m_PrefabInstance: {fileID: 370119654}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &444313701 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2753612866208906053, guid: 86c51ff004ebef94985d108436b92527, type: 3}
+  m_PrefabInstance: {fileID: 1224440178}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &500009645 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4537751617235107781, guid: 86c51ff004ebef94985d108436b92527, type: 3}
@@ -3097,6 +3108,14 @@ PrefabInstance:
       propertyPath: shieldBar
       value: 
       objectReference: {fileID: 887680868}
+    - target: {fileID: 1658162191, guid: 86c51ff004ebef94985d108436b92527, type: 3}
+      propertyPath: maxShield
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737657843799890517, guid: 86c51ff004ebef94985d108436b92527, type: 3}
+      propertyPath: shieldBar
+      value: 
+      objectReference: {fileID: 444313701}
     - target: {fileID: 6477022975798778809, guid: 86c51ff004ebef94985d108436b92527, type: 3}
       propertyPath: m_Name
       value: Player

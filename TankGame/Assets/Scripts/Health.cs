@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        RaiseHealthChanged();
     }
 
     public bool AddHealth(float amount)
@@ -36,14 +37,7 @@ public class Health : MonoBehaviour
             currentHealth += amount;
         }
 
-        HealthArgs args = new HealthArgs();
-
-        args.currentHealth = currentHealth;
-        args.minHealth = minHealth;
-        args.maxHealth = maxHealth;
-        args.isDead = false;
-
-        HealthChanged.Invoke(this, args);
+        RaiseHealthChanged();
 
         return true;
     }
@@ -51,23 +45,42 @@ public class Health : MonoBehaviour
     public void AddDamage(float amount)
     {
         currentHealth -= amount;
-
-        HealthArgs args = new HealthArgs();
-            
-        args.currentHealth = currentHealth;
-        args.minHealth = minHealth;
-        args.maxHealth = maxHealth;
+        RaiseHealthChanged();
 
         if (currentHealth <= minHealth)
         {
+            RaiseDeath();
+            return;
+        }
+    }
+
+    void RaiseHealthChanged()
+    {
+        if (HealthChanged != null)
+        {
+            HealthArgs args = new HealthArgs();
+
+            args.currentHealth = currentHealth;
+            args.minHealth = minHealth;
+            args.maxHealth = maxHealth;
+            args.isDead = false;
+
+            HealthChanged.Invoke(this, args);
+        }
+    }
+
+    void RaiseDeath()
+    {
+        if (Die != null)
+        {
+            HealthArgs args = new HealthArgs();
+
+            args.currentHealth = currentHealth;
+            args.minHealth = minHealth;
+            args.maxHealth = maxHealth;
             args.isDead = true;
 
             Die.Invoke(this, args);
-            return;
         }
-
-        args.isDead = false;
-
-        HealthChanged.Invoke(this, args);
     }
 }

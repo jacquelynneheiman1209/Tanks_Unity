@@ -6,18 +6,18 @@ using UnityEngine.UI;
 
 public class UIShieldBar : MonoBehaviour
 {
-    [SerializeField] private UIManager manager;
+    public UIManager manager;
     [SerializeField] private Image shieldBar;
 
     private void Start()
     {
         if (manager != null)
         {
-            Shields health = manager.parent.GetComponent<Shields>();
+            Shields shield = manager.parent.GetComponent<Shields>();
 
-            if (health != null)
+            if (shield != null)
             {
-                health.ShieldChanged += UpdateShieldBar;
+                shield.ShieldChanged += UpdateShieldBar;
             }
         }
     }
@@ -28,7 +28,10 @@ public class UIShieldBar : MonoBehaviour
 
         if (shieldArgs != null)
         {
-            shieldBar.fillAmount = shieldArgs.currentShield / shieldArgs.maxShield;
+            if (shieldBar != null)
+            {
+                shieldBar.fillAmount = shieldArgs.currentShield / shieldArgs.maxShield;
+            }
         }
     }
 

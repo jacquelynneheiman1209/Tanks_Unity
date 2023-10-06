@@ -13,6 +13,12 @@ public class Shields : MonoBehaviour
     public event EventHandler ShieldChanged;
     public event EventHandler ShieldDestroyed;
 
+    private void Start()
+    {
+        currentShield = maxShield;
+        RaiseShieldChanged();
+    }
+
     public bool Generate(float amount)
     {
         if (currentShield >= maxShield)
@@ -82,27 +88,33 @@ public class Shields : MonoBehaviour
 
     void RaiseShieldChanged()
     {
-        ShieldArgs args = new ShieldArgs();
+        if (ShieldChanged != null)
+        {
+            ShieldArgs args = new ShieldArgs();
 
-        args.minShield = minShield;
-        args.maxShield = maxShield;
-        args.currentShield = currentShield;
+            args.minShield = minShield;
+            args.maxShield = maxShield;
+            args.currentShield = currentShield;
 
-        args.isDestroyed = false;
+            args.isDestroyed = false;
 
-        ShieldChanged.Invoke(this, args);
+            ShieldChanged.Invoke(this, args);
+        }   
     }
 
     void RaiseShieldDestroyed()
     {
-        ShieldArgs args = new ShieldArgs();
+        if (ShieldDestroyed != null)
+        {
+            ShieldArgs args = new ShieldArgs();
 
-        args.minShield = minShield;
-        args.maxShield = maxShield;
-        args.currentShield = currentShield;
+            args.minShield = minShield;
+            args.maxShield = maxShield;
+            args.currentShield = currentShield;
 
-        args.isDestroyed = true;
+            args.isDestroyed = true;
 
-        ShieldDestroyed.Invoke(this, args);
+            ShieldDestroyed.Invoke(this, args);
+        }
     }
 }

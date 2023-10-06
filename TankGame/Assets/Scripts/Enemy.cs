@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Enemy : Pawn
 {
     [SerializeField] private UIManager uiManager;
-    [SerializeField] private Image healthBar;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -16,10 +15,15 @@ public class Enemy : Pawn
 
         uiManager = GetComponentInChildren<UIManager>();
 
-        uiManager.parent = this.gameObject;
+        if (uiManager != null)
+        {
+            uiManager.parent = this.gameObject;
+        }
 
-        health.Die += OnDeath;
-
+        if (health != null)
+        {
+            health.Die += OnDeath;
+        }
     }
 
     protected override void OnDeath(object sender, EventArgs args)
